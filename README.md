@@ -1,7 +1,8 @@
 # Migrating template to react
 
 In this project the next basic website bootstrap template was migrate to a react project,
-that means some of the sections of the template were convert to react components.
+that means some of the sections of the template were convert to react components,
+the template used in this project is located on the next URL https://github.com/StartBootstrap/startbootstrap-agency/tree/v5.0.6.
 
 ## Available Scripts
 

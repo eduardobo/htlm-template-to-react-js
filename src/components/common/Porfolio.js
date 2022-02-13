@@ -108,22 +108,31 @@ class Porfolio extends Component {
                 client: '',
                 Category: '',
                 button: '',
-            }
+            },
+            displayModal: false
         }
     }
 
-    displayModal = (e) => {
-        console.log(e.target);
-        let modalRef = e.target.parentElement.dataset.modalId;
-        if(modals[modalRef]) {
-            console.log(modalRef);
-            this.setState({modal: modals[modalRef]});
-            document.querySelector('.modal').classList.add('show');
+    displayModal = (modalId) => {
+        if(modals[modalId]) {
+            let pageTop = $('body');
+            console.log(pageTop);
+            pageTop.addClass('modal-open');
+            pageTop.css('padding-right', '17px');
+
+            this.setState({modal: modals[modalId], displayModal: true});
         }
         else {
             alert('Error modal not found');
         }
     };
+
+    hideModal = (e) => {
+        let pageTop = $('#page-body');
+            pageTop.removeClass('modal-open');
+            pageTop.css('padding-right');
+        this.setState({displayModal: false});
+    }
 
     render() {
         return(
@@ -139,13 +148,22 @@ class Porfolio extends Component {
 
                         <div className="row">
                             {porfolioItems.map((item, i) => {
-                                return <PorfolioItem key={i} {...item} onClick={e => {this.displayModal(e)}}/>
+                                return <PorfolioItem key={i}
+                                            {...item}
+                                            onClick={(modalId) => {this.displayModal(modalId)}}/>
                             })}
                         </div>
                     </div>
                 </section>
 
-                <Modal {...this.state.modal}/>
+                <Modal {...this.state.modal}
+                    displayModal={this.state.displayModal}
+                    onClick={e => {this.hideModal(e)}}/>
+
+                {this.state.displayModal ? 
+                    <div className="modal-backdrop fade show"></div> 
+                    : null
+                }
             </div>
         )
     }

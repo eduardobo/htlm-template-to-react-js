@@ -3,10 +3,15 @@ import React, {Component} from 'react';
 class Modal extends Component {
     render() {
         return (
-            <div className="portfolio-modal modal fade" id="#portfolioModal" tabIndex="-1" role="dialog" aria-hidden="true">
+            <div className={`portfolio-modal modal fade ${this.props.displayModal ? 'show' : ''}`}
+                id="#portfolioModal"
+                tabIndex="-1"
+                role="dialog"
+                aria-hidden="true"
+                style={this.props.displayModal ? {display: 'block', paddingRight: '17px'} : {}}>
                 <div className="modal-dialog">
                     <div className="modal-content">
-                        <div className="close-modal" data-dismiss="modal">
+                        <div className="close-modal" data-dismiss="modal" onClick={e => {this.props.onClick(e)}}>
                             <div className="lr">
                                 <div className="rl"></div>
                             </div>
@@ -28,7 +33,10 @@ class Modal extends Component {
                                             <li>Category: {this.props.category}</li>
                                         </ul>
 
-                                        <button className="btn btn-primary" data-dismiss="modal" type="button">
+                                        <button className="btn btn-primary"
+                                            data-dismiss="modal"
+                                            type="button"
+                                            onClick={e => {this.props.onClick(e)}}>
                                         <i className="fas fa-times"></i>
                                         Close Project</button>
                                     </div>
